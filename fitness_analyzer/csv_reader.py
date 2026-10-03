@@ -125,7 +125,15 @@ def load_sessions(file_path, participants):
                     f"Unknown participant ID: {row['participant_id']}"
                 )
                 continue
+            session_id = row["session_id"]
 
+            if session_id not in sessions:
+                participant = participants[row["participant_id"]]
+
+                sessions[session_id] = FitnessSession(
+                    session_id,
+                    participant,
+                )
 
             try:
                 field = "timestamp"
@@ -193,15 +201,7 @@ def load_sessions(file_path, participants):
                 )
                 continue
 
-            session_id = row["session_id"]
 
-            if session_id not in sessions:
-                participant = participants[row["participant_id"]]
-
-                sessions[session_id] = FitnessSession(
-                    session_id,
-                    participant,
-                )
             sessions[session_id].add_observation(observation)
 
 

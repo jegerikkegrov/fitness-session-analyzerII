@@ -1,9 +1,11 @@
 from fitness_analyzer.csv_reader import load_participants, load_sessions
+from fitness_analyzer.analysis import analyze_session
+
 
 participants = load_participants("data/participants.csv")
 
 sessions, rejected_records = load_sessions(
-    "data/fitness_sessions_invalid.csv",
+    "data/fitness_sessions.csv",
     participants,
 )
 
@@ -21,4 +23,9 @@ for session_id, session in sessions.items():
         "- Observation:",
         len(session.observations),
     )
+
+print("\nAnalysis results:")
+for session in sessions.values():
+    result = analyze_session(session)
+    print(result)
 

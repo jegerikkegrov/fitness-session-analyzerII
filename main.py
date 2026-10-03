@@ -1,8 +1,19 @@
-from fitness_analyzer.csv_reader import load_participants
+from fitness_analyzer.csv_reader import load_participants, load_sessions
 
 participants = load_participants("data/participants.csv")
 
-print("Participants: loaded:", len(participants))
+sessions = load_sessions(
+    "data/fitness_sessions.csv",
+    participants,
+)
 
-for participant_id in participants:
-    print(participant_id)
+print("Sessions loaded", len(sessions))
+
+for session_id, session in sessions.items():
+    print(
+        session_id,
+        "- Participant:",
+        session.participant.participant_id,
+        "- Observation:",
+        len(session.observations),
+    )

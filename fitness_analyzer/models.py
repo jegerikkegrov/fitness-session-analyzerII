@@ -34,18 +34,18 @@ class Observation:
 class FitnessSession:
     def __init__(
             self,
-            timestamp,
-            heart_rate,
+            session_id,
+            participant,
     ):
         self.session_id = session_id
         self.participant = participant
-        self.observations = []
+        self._observations = []
 
     def add_observation(self, observation):
-        self.observations.append(observation)
+        self._observations.append(observation)
 
     @property
     def observations(self):
-        return self.observations.copy()
+        return self._observations.copy()
 
 

@@ -52,6 +52,19 @@ def validate_signal_quality(signal_quality):
         raise ValueError(
             f"Signal quality out of range: {signal_quality}"
         )
+
+    if signal_quality < 0.5:
+        raise ValueError(
+            f"Signal quality too low: {signal_quality}"
+        )
+
+    return True
+
+def validate_timestamp(timestamp):
+    if timestamp < 0:
+        raise ValueError(
+            f"Timestamp cannot be negative: {timestamp}"
+        )
     return True
 
 

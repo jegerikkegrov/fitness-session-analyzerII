@@ -9,7 +9,7 @@ from fitness_analyzer.reports import (
 
 participants = load_participants("data/participants.csv")
 
-valid_sessions, rejected_records = load_sessions(
+valid_sessions, valid_rejected = load_sessions(
     "data/fitness_sessions.csv",
     participants,
 )
@@ -22,6 +22,8 @@ invalid_sessions, invalid_rejected = load_sessions(
 sessions = {}
 sessions.update(valid_sessions)
 sessions.update(invalid_sessions)
+
+rejected_records = valid_rejected + invalid_rejected
 
 
 print("Rejected records:", len(rejected_records))

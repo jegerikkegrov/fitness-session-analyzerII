@@ -12,7 +12,10 @@ from fitness_analyzer.validation import (
     validate_skin_response,
     validate_timestamp
 )
-from fitness_analyzer.exceptions import InvalidIdentifierError
+from fitness_analyzer.exceptions import (
+    InvalidIdentifierError,
+    InvalidRecordError,
+)
 
 def add_rejection(rejected_records, file_path, row_number, field, reason):
     rejected_records.append({
@@ -191,7 +194,7 @@ def load_sessions(file_path, participants):
                 field = "signal_quality"
                 validate_signal_quality(observation.signal_quality)
 
-            except ValueError as error:
+            except InvalidRecordError as error:
                 add_rejection(
                     rejected_records,
                     file_path,
